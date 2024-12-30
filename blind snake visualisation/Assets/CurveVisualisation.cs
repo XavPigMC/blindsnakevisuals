@@ -1,7 +1,5 @@
 using System;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class CurveVisualisation : MonoBehaviour
 {
@@ -13,10 +11,15 @@ public class CurveVisualisation : MonoBehaviour
     private Texture2D _texture;
     private Material _material;
     private readonly Vector3 _quadSize = new Vector3(10, 10, 0);
-    
+    public bool showDiagonal;
+
+    public uint currentPowerOfTwo = 2;
+    private SnakeCurveFillSegmentedOptimized curveFillSegmented;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         _texture = new Texture2D(gridSize, gridSize)
         {
             filterMode = FilterMode.Point
@@ -31,10 +34,19 @@ public class CurveVisualisation : MonoBehaviour
         quad.transform.parent = transform;
         quad.GetComponent<Renderer>().material = _material;
         quad.transform.localScale = _quadSize;
-
+        curveFillSegmented = new SnakeCurveFillSegmentedOptimized(_texture, new Vector2Int(-1, -1)); //-1 because I don't want the program to stop.
         BaseTexture();
     }
 
+    public void FillSegment()
+    {
+        curveFillSegmented.snakePosition = currentPowerOfTwo % 2 == 1 ? new Vector2Int(1, (int)Math.Pow(2, currentPowerOfTwo-1)) : new Vector2Int((int)Math.Pow(2, currentPowerOfTwo-1), 1);
+        Debug.Log("starting at : " + curveFillSegmented.snakePosition);
+        curveFillSegmented.DO_IT_SURFACE_OPTIMIZED(currentPowerOfTwo);
+        Debug.Log("ending at : " + curveFillSegmented.snakePosition);
+        
+    }
+    
     public void BaseTexture()
     {
         for (int i = 0; i < _texture.width; i++)
@@ -46,9 +58,19 @@ public class CurveVisualisation : MonoBehaviour
         }
 
         ColorForSurface_geometricSurface(2);
+        if (showDiagonal)
+        {
+            for (int i = 0; i < _texture.width; i++)
+            {
+                _texture.SetPixel(i, i, Color.red);
+            }
+        }
+
         _texture.Apply();
     }
 
+    #region various coloring patterns
+    // ReSharper disable once UnusedMember.Local
     private void ColorForSurface_geometricTwoThenFive()
     {
         uint s = 2;
@@ -99,14 +121,8 @@ public class CurveVisualisation : MonoBehaviour
         }
     }
 
-    private void ColorForSurface_squareIntegersMultipliedByLn()
-    {
-        for (uint step = 2; step <= maxS; step++)
-        {
-            uint s = step * step * step;
-        }
-    }
 
+    // ReSharper disable once UnusedMember.Local
     private void ColorForSurface_cubeIntegers()
     {
         for (uint step = 2; step <= Math.Pow(maxS, 1f/3); step++)
@@ -128,6 +144,7 @@ public class CurveVisualisation : MonoBehaviour
         }
     }
     
+    // ReSharper disable once UnusedMember.Local
     private void ColorForSurface_constantIncrement(uint increment)
     {
         for (uint step = 1; step <= maxS; step++)
@@ -149,6 +166,7 @@ public class CurveVisualisation : MonoBehaviour
         }
     }
 
+    // ReSharper disable once UnusedMember.Local
     private void ColorForSurface_squareIntegers()
     {
         for (uint sRoot = 2; sRoot <= Math.Sqrt(maxS); sRoot++)
@@ -170,8 +188,8 @@ public class CurveVisualisation : MonoBehaviour
             }
         }
     }
-
-
+    #endregion
+    
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

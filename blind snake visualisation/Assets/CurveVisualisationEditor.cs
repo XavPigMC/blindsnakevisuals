@@ -14,5 +14,10 @@ public class CurveVisualisationEditor : Editor
         {
             curveVisualisation.BaseTexture();
         }
+        
+        if (GUILayout.Button("Fill power of 2 curve"))
+        {
+            curveVisualisation.FillSegment();
+        }
     }
 }

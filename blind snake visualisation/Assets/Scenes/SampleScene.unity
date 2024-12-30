@@ -239,6 +239,8 @@ MonoBehaviour:
   gridSize: 400
   someConstant: 3
   maxS: 400
+  showDiagonal: 0
+  currentPowerOfTwo: 5
 --- !u!4 &1542019851
 Transform:
   m_ObjectHideFlags: 0
@@ -294,7 +296,7 @@ MonoBehaviour:
   diagonal_coef: 1.61803398874989
   total_move: 0
   max_moves: 3.141592653589793
-  AutoMoveSnake: 1
+  AutoMoveSnake: 0
   Timer: 0
   speed: 50
 --- !u!4 &1957557869

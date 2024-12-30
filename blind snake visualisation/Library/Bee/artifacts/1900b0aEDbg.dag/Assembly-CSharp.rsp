@@ -117,9 +117,9 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"D:/JANKO/Unity/blind snake visualisation/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
--r:"D:/JANKO/Unity/blind snake visualisation/Library/PackageCache/com.unity.testtools.codecoverage@1.0.1/lib/ReportGenerator/ReportGeneratorMerged.dll"
--r:"D:/JANKO/Unity/blind snake visualisation/Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"D:/JANKO/Unity/blindsnakevisuals/blind snake visualisation/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
+-r:"D:/JANKO/Unity/blindsnakevisuals/blind snake visualisation/Library/PackageCache/com.unity.testtools.codecoverage@1.0.1/lib/ReportGenerator/ReportGeneratorMerged.dll"
+-r:"D:/JANKO/Unity/blindsnakevisuals/blind snake visualisation/Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"D:/UNITY/2021.3.3f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/UNITY/2021.3.3f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"D:/UNITY/2021.3.3f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
@@ -353,6 +353,8 @@
 "Assets/CurveVisualisationEditor.cs"
 "Assets/NewBehaviourScript.cs"
 "Assets/SnakeCurveFill.cs"
+"Assets/SnakeCurveFillSegmented.cs"
+"Assets/SnakeCurveFillSegmentedOptimized.cs"
 "Assets/VisualisationEditor.cs"
 -langversion:9.0
 
